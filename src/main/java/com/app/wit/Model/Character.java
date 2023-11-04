@@ -12,7 +12,8 @@ import java.util.Date;
 public class Character {
 
     //PUBLIC METHODS
-    public Character(String name,
+    public Character(int id,
+                     String name,
                      String firstname,
                      Date birthdate,
                      String university_city,
@@ -27,8 +28,10 @@ public class Character {
                      boolean holding_something,
                      String top_color,
                      boolean displayed_as_kid,
-                     boolean displayed_as_smiling)
+                     boolean displayed_as_smiling,
+                     String image_path)
     {
+        _id = id;
         _name = name;
         _firstname = firstname;
         _birthdate = birthdate;
@@ -45,6 +48,11 @@ public class Character {
         _top_color = top_color;
         _displayed_as_kid = displayed_as_kid;
         _displayed_as_smiling = displayed_as_smiling;
+        _image_path = image_path;
+    }
+
+    public int getId() {
+        return _id;
     }
 
     public String getName() {
@@ -111,6 +119,10 @@ public class Character {
         return _displayed_as_smiling;
     }
 
+    public String getImagePath() {
+        return _image_path;
+    }
+
     //PUBLIC STATIC METHODS
     public static ArrayList<Character> loadCharactersFromFile(File file) {
         ArrayList<Character> characters_list = new ArrayList<Character>();
@@ -128,7 +140,7 @@ public class Character {
                 }
 
                 String[] parts = line.split(";");
-                if (parts.length == 16) {
+                if (parts.length == 17) {
                     Character character = createCharacterFromCSV(parts);
                     characters_list.add(character);
                 }
@@ -144,29 +156,32 @@ public class Character {
 
     //PRIVATE STATIC METHODS
     private static Character createCharacterFromCSV(String[] data) throws ParseException {
-        String name = data[0].toUpperCase();
-        String firstname = data[1].toUpperCase();
-        Date birthdate = new SimpleDateFormat("dd/MM/yyyy").parse(data[2]);
-        String university_city = data[3].toUpperCase();
-        boolean glasses = data[4].equalsIgnoreCase("O");
-        boolean mustache = data[5].equalsIgnoreCase("O");
-        boolean beard = data[6].equalsIgnoreCase("O");
-        String hair_type = data[7].toUpperCase();
-        String hair_color = data[8].toUpperCase();
-        String eyes_color = data[9].toUpperCase();
-        String gender = data[10].toUpperCase();
-        boolean hat = data[11].equalsIgnoreCase("O");
-        boolean holding_something = data[12].equalsIgnoreCase("O");
-        String top_color = data[13].toUpperCase();
-        boolean displayed_as_kid = data[14].equalsIgnoreCase("O");
-        boolean displayed_as_smiling = data[15].equalsIgnoreCase("O");
+        int id = Integer.parseInt(data[0]);
+        String name = data[1].toUpperCase();
+        String firstname = data[2].toUpperCase();
+        Date birthdate = new SimpleDateFormat("dd/MM/yyyy").parse(data[3]);
+        String university_city = data[4].toUpperCase();
+        boolean glasses = data[5].equalsIgnoreCase("O");
+        boolean mustache = data[6].equalsIgnoreCase("O");
+        boolean beard = data[7].equalsIgnoreCase("O");
+        String hair_type = data[8].toUpperCase();
+        String hair_color = data[9].toUpperCase();
+        String eyes_color = data[10].toUpperCase();
+        String gender = data[11].toUpperCase();
+        boolean hat = data[12].equalsIgnoreCase("O");
+        boolean holding_something = data[13].equalsIgnoreCase("O");
+        String top_color = data[14].toUpperCase();
+        boolean displayed_as_kid = data[15].equalsIgnoreCase("O");
+        boolean displayed_as_smiling = data[16].equalsIgnoreCase("O");
 
-        return new Character(name, firstname, birthdate, university_city, glasses, mustache, beard, hair_type,
-                hair_color, eyes_color, gender, hat, holding_something, top_color, displayed_as_kid, displayed_as_smiling);
+        return new Character(id, name, firstname, birthdate, university_city, glasses, mustache, beard, hair_type,
+                hair_color, eyes_color, gender, hat, holding_something, top_color, displayed_as_kid, displayed_as_smiling,
+                Application.getGameDataFile().getParent() + "\\" + id + ".jpg");
     }
 
 
 //PRIVATE ATTRIBUTES
+    private int _id;
     private String _name;
     private String _firstname;
     private Date _birthdate;
@@ -183,4 +198,5 @@ public class Character {
     private String _top_color;
     private boolean _displayed_as_kid;
     private boolean _displayed_as_smiling;
+    private String _image_path;
 }
