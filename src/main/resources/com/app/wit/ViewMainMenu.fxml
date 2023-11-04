@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: rgb(0, 178, 202);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.wit.View.ViewMainMenuController">
+  <children>
+    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <children>
+        <Label text="Who is this ?" textFill="#fffdf7">
+          <font>
+            <Font name="Arial Rounded MT Bold" size="96.0" />
+          </font>
+          <effect>
+            <DropShadow />
+          </effect></Label>
+      </children>
+    </HBox>
+    <GridPane alignment="CENTER" vgap="15.0" VBox.vgrow="ALWAYS">
+      <rowConstraints>
+        <RowConstraints percentHeight="20.0" />
+        <RowConstraints percentHeight="20.0" />
+      </rowConstraints>
+      <columnConstraints>
+        <ColumnConstraints halignment="CENTER" percentWidth="35.0" />
+      </columnConstraints>
+      <children>
+        <Button fx:id="_newgame_button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNewGameButton" text="Start a new game" textAlignment="CENTER" textFill="#151515">
+          <font>
+            <Font size="40.0" />
+          </font>
+          <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          </padding>
+        </Button>
+        <Button fx:id="_exit_button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleExitButton" text="Exit the game" textAlignment="CENTER" textFill="#151515" GridPane.rowIndex="1">
+          <font>
+            <Font size="40.0" />
+          </font>
+          <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+          </padding>
+        </Button>
+      </children></GridPane>
+  </children>
+  <padding>
+    <Insets bottom="50.0" top="50.0" />
+  </padding>
+</VBox>
