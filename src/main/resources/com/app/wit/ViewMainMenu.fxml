@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: rgb(0, 178, 202);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.wit.View.ViewMainMenuController">
+<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="720" minWidth="1280" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: rgb(0, 178, 202);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.wit.View.ViewMainMenuController">
   <children>
     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
       <children>
-        <Label text="Who is this ?" textFill="#fffdf7">
+        <Label fx:id="_title_label" text="Who is it ?" textFill="#fffdf7">
           <font>
             <Font name="Arial Rounded MT Bold" size="96.0" />
           </font>
@@ -30,7 +30,7 @@
         <RowConstraints percentHeight="20.0" />
       </rowConstraints>
       <columnConstraints>
-        <ColumnConstraints halignment="CENTER" percentWidth="35.0" />
+        <ColumnConstraints halignment="CENTER" percentWidth="50.0" />
       </columnConstraints>
       <children>
         <Button fx:id="_newgame_button" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleNewGameButton" text="Start a new game" textAlignment="CENTER" textFill="#151515">
