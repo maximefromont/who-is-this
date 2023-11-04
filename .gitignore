@@ -36,7 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/data_qui-est-ce_fromont.csv
-/family_game_data.csv
+/game-data/*
 /.idea/encodings.xml
 /.idea/uiDesigner.xml
