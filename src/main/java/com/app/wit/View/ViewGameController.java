@@ -28,8 +28,12 @@ public class ViewGameController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         //_title_label.setText(PropertiesReader.getMessage(Application.getLanguage(), "game-title"));
+
         _characters_list = Character.loadCharactersFromFile(Application.getGameDataFile());
-        _tiles_list = new ArrayList<>();
+        _tiles_list = new ArrayList<Tile>();
+        for(Character character : _characters_list) {
+            _tiles_list.add(new Tile(character));
+        }
 
         refeshGameLayout(Application.INITIAL_WINDOW_WIDTH);
 
@@ -75,23 +79,16 @@ public class ViewGameController implements Initializable {
 
     //PRIVATE METHODS
     public void refeshGameLayout(int window_width) {
-        if(_tiles_list.size() > 0) {
-            _tiles_list.clear();
+        if(_game_layout_grid_pane.getChildren().size() > 0) {
+            _game_layout_grid_pane.getChildren().clear();
         }
 
-        int column_counter = 0;
-        int row_counter = 0;
-        int fraction = (int) Math.floor(window_width / (Application.PICTURE_SIZE + Application.PICTURE_PADDING)) - 3;
-        for(Character character : _characters_list) {
-            if(column_counter > fraction) { //Picture padding is in the gridpane settings
-                column_counter = 0;
-                row_counter++;
-            }
+        int max_column = (int) Math.floor(window_width / (Application.PICTURE_SIZE + Application.PICTURE_PADDING)) - 2; //Picture padding is in the gridpane settings
 
-            _tiles_list.add(new Tile(new Image(character.getImagePath())));
-
-            _game_layout_grid_pane.add(_tiles_list.get(_tiles_list.size() - 1).getCellPane(), column_counter, row_counter);
-            column_counter++;
+        for (int i = 0; i < _tiles_list.size(); i++) {
+            int column = i % max_column;
+            int row = i / max_column;
+            _game_layout_grid_pane.add(_tiles_list.get(i).getCellPane(), column, row);
         }
     }
 

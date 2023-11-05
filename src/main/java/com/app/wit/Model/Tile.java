@@ -9,8 +9,11 @@ import javafx.scene.layout.StackPane;
 public class Tile {
 
     //PUBLIC METHODS
-    public Tile(Image image) {
+    public Tile(Character character) {
 
+        _character = character;
+
+        Image image = new Image(_character.getImagePath());
         ImageView image_view = new ImageView();
         image_view.setImage(image);
         image_view.setFitWidth(Application.PICTURE_SIZE);
@@ -35,12 +38,22 @@ public class Tile {
     }
 
     public void toggleSelected() {
-        _is_selected = !_is_selected;
+        if(_is_selected) {
+            _is_selected = false;
+            _selected_tiles_counter--;
+        } else {
+            _is_selected = true;
+            _selected_tiles_counter++;
+        }
         refreshStyle();
     }
 
     public StackPane getCellPane() {
         return _cell_pane;
+    }
+
+    public static int getSelectedTilesCounter() {
+        return _selected_tiles_counter;
     }
 
     //PRIVATE METHODS
@@ -56,6 +69,10 @@ public class Tile {
     private boolean _is_hovered;
     private boolean _is_selected;
     private StackPane _cell_pane;
+    private Character _character;
+
+    //PRIVATE STATIC ATTRIBUTES
+    private static int _selected_tiles_counter = 0;
 
     //PRIVATE CONSTANTS
     private static final String IDLE_BUTTON_STYLE = "-fx-background-color: #fffdf7; -fx-background-radius: 5;";
