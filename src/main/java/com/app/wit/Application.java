@@ -1,8 +1,10 @@
 package com.app.wit;
 
 import com.app.wit.Tool.PropertiesReader;
+import com.app.wit.View.ViewGameController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -57,7 +59,8 @@ public class Application extends javafx.application.Application {
         Platform.runLater(() -> {
             try {
                 FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("ViewGame.fxml"));
-                Scene scene = new Scene(fxmlLoader.load());
+                Parent root = (Parent)fxmlLoader.load();
+                Scene scene = new Scene(root);
                 _game_stage = new Stage();
                 _game_stage.setTitle(PropertiesReader.getMessage(_language, "game-title"));
                 _game_stage.setScene(scene);
@@ -65,6 +68,12 @@ public class Application extends javafx.application.Application {
                 _game_stage.setMinWidth(1280);
                 _game_stage.setX(_main_menu_stage.getX());
                 _game_stage.setY(_main_menu_stage.getY());
+
+                _game_stage.widthProperty().addListener((obs, oldVal, newVal) -> {
+                    ViewGameController controller = (ViewGameController)fxmlLoader.getController();
+                    controller.refeshGameLayout(newVal.intValue());
+                });
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -103,6 +112,10 @@ public class Application extends javafx.application.Application {
 
         return choosen_file;
     }
+
+    //PUBLIC CONSTANTS
+    public static final int INITIAL_WINDOW_WIDTH = 1280;
+    public static final int INITIAL_WINDOW_HEIGHT = 720;
 
     //PRIVATE ATTRIBUTES
     private static Stage _main_menu_stage = null;
