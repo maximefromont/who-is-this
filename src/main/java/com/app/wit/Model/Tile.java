@@ -1,6 +1,7 @@
 package com.app.wit.Model;
 
 import com.app.wit.Application;
+import com.app.wit.Tool.PropertiesReader;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,7 +25,7 @@ public class Tile {
 
         _cell_pane = new StackPane();
         _cell_pane.setAlignment(Pos.CENTER);
-        _cell_pane.setStyle(IDLE_BUTTON_STYLE);
+        _cell_pane.setStyle(IDLE_TILE_STYLE);
         _cell_pane.setOnMouseEntered(e -> setHovered(true));
         _cell_pane.setOnMouseExited(e -> setHovered(false));
         _cell_pane.setOnMouseClicked(e -> toggleSelected());
@@ -58,10 +59,12 @@ public class Tile {
 
     //PRIVATE METHODS
     private void refreshStyle() {
-        if(_is_selected || _is_hovered) {
-            _cell_pane.setStyle(HOVERED_BUTTON_STYLE);
+        if(_is_selected) {
+            _cell_pane.setStyle(SELECTED_TILE_STYLE);
+        } else if (_is_hovered) {
+            _cell_pane.setStyle(HOVERED_TILE_STYLE);
         } else {
-            _cell_pane.setStyle(IDLE_BUTTON_STYLE);
+            _cell_pane.setStyle(IDLE_TILE_STYLE);
         }
     }
 
@@ -75,6 +78,10 @@ public class Tile {
     private static int _selected_tiles_counter = 0;
 
     //PRIVATE CONSTANTS
-    private static final String IDLE_BUTTON_STYLE = "-fx-background-color: #fffdf7; -fx-background-radius: 5;";
-    private static final String HOVERED_BUTTON_STYLE = "-fx-background-color: rgb(166, 61, 64); -fx-background-radius: 5;";
+    private static final String IDLE_TILE_STYLE = "-fx-background-color: "
+            + PropertiesReader.getColour(Application.getColourTheme(), "button-colour") +"; -fx-background-radius: 5;";
+    private static final String HOVERED_TILE_STYLE = "-fx-background-color: "
+            + PropertiesReader.getColour(Application.getColourTheme(), "hovered-button-colour") +"; -fx-background-radius: 5;";
+    private static final String SELECTED_TILE_STYLE = "-fx-background-color: "
+            + PropertiesReader.getColour(Application.getColourTheme(), "red-accent-colour") +"; -fx-background-radius: 5;";
 }

@@ -27,6 +27,7 @@ public class Application extends javafx.application.Application {
     public static String getLanguage() {
         return _language;
     }
+    public static String getColourTheme() { return _colour_theme; }
 
     public static void setGameDataFile(File game_data_file) {
         _game_data_file = game_data_file;
@@ -125,6 +126,8 @@ public class Application extends javafx.application.Application {
 
     private static File  _game_data_file  = null;
 
+    //APPLICATION SETTINGS
     private static String _language       = "fr";
+    private static String _colour_theme   = "1";
 
 }

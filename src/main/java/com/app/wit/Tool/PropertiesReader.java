@@ -12,6 +12,10 @@ public class PropertiesReader {
         return getValueFromKey(key, "src/main/resources/language-" + language + ".properties");
     }
 
+    public static String getColour(String colour_theme_id, String key) {
+        return getValueFromKey(key, "src/main/resources/colour-theme-" + colour_theme_id + ".properties");
+    }
+
     public static String getPath(String key) {
         return getValueFromKey(key, "src/main/resources/path.properties");
     }
