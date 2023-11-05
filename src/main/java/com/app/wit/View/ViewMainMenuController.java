@@ -1,10 +1,13 @@
 package com.app.wit.View;
 
 import com.app.wit.Application;
+import com.app.wit.Tool.PropertiesReader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.stage.FileChooser;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 
 import java.io.File;
 import java.net.URL;
@@ -15,8 +18,19 @@ public class ViewMainMenuController implements Initializable {
     //PUBLIC METHODS
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //BOTH SCENES
+        _title_label.setText(PropertiesReader.getMessage(Application.getLanguage(), "game-title"));
+
+        //MAIN MENU SCENE
         computeMainMenyButtonStyle(_newgame_button);
         computeMainMenyButtonStyle(_exit_button);
+        _newgame_button.setText(PropertiesReader.getMessage(Application.getLanguage(), "new-game"));
+        _exit_button.setText(PropertiesReader.getMessage(Application.getLanguage(), "exit-game"));
+
+        //LOADING SCENE
+        _loading_label.setText(PropertiesReader.getMessage(Application.getLanguage(), "loading"));
+        setLoadingScreenState(false);
     }
 
     //PROTECTED METHODS
@@ -27,12 +41,14 @@ public class ViewMainMenuController implements Initializable {
 
     @FXML
     protected void handleNewGameButton() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select your game data file");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("CSV File", "*.csv")
-        );
-        File game_data_file = fileChooser.showOpenDialog(Application.getMainMenuStage());
+
+        File choosen_file = Application.openFileChooser("select-file", "csv-file", "*.csv", "last-game-file-path");
+
+        if(choosen_file != null) {
+            Application.setGameDataFile(choosen_file);
+            setLoadingScreenState(true);
+            Application.switchToGameView();
+        }
     }
 
     //PRIVATE METHODS
@@ -43,11 +59,27 @@ public class ViewMainMenuController implements Initializable {
         button.setOnMouseExited(e -> button.setStyle(IDLE_BUTTON_STYLE));
     }
 
+    private void setLoadingScreenState(boolean state) {
+        _loading_hbox.setVisible(state);
+        _loading_hbox.setManaged(state);
+
+        _buttons_layout_gridpane.setVisible(!state);
+        _buttons_layout_gridpane.setManaged(!state);
+    }
+
     //PROTECTED ATTRIBUTE
     @FXML
-    protected Button _newgame_button;
+    protected Label    _title_label;
     @FXML
-    protected Button _exit_button;
+    protected GridPane _buttons_layout_gridpane;
+    @FXML
+    protected Button   _newgame_button;
+    @FXML
+    protected Button   _exit_button;
+    @FXML
+    protected Label    _loading_label;
+    @FXML
+    protected HBox     _loading_hbox;
 
     //PRIVATE ATTRIBUTES
 

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" spacing="20.0" style="-fx-background-color: rgb(0, 178, 202);" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.app.wit.View.ViewGameController">
+    <children>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" style="-fx-border-radius: 5; -fx-border-color: rgb(255, 255, 255); -fx-border-width: 3;">
+         <children>
+      <!--        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+              <children>
+                  <Label fx:id="_title_label" text="Who is it ?" textFill="#fffdf7">
+                      <font>
+                          <Font name="Arial Rounded MT Bold" size="50.0" />
+                      </font>
+                      <effect>
+                          <DropShadow />
+                      </effect></Label>
+              </children>
+              </HBox>-->
+              <GridPane fx:id="_game_layout_grid_pane" alignment="CENTER" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vgap="10.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+               </VBox.margin>
+            </GridPane>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="20.0" style="-fx-border-radius: 5; -fx-border-color: rgb(255, 255, 255); -fx-border-width: 3;">
+         <children>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+               <children>
+                  <TreeView fx:id="_questions_treeview" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox fx:id="_data_form_hbox" prefHeight="100.0" prefWidth="200.0" />
+                        <Button fx:id="_validate_button" mnemonicParsing="false" text="Button" />
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="_question_title_label" text="Label" />
+                        <Label fx:id="_question_label" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="_answer_title_label" text="Label" />
+                        <Label fx:id="_answer_label" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="5.0" right="5.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+      <!--<HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label fx:id="_instruction_label" text="Label">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>-->
+   </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
+</VBox>
