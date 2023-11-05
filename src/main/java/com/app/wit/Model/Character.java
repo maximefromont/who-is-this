@@ -1,7 +1,6 @@
 package com.app.wit.Model;
 
 import com.app.wit.Application;
-import javafx.scene.paint.Color;
 
 import java.io.*;
 import java.text.ParseException;
@@ -14,8 +13,8 @@ public class Character {
     //PUBLIC METHODS
     public Character(int id,
                      String name,
-                     String firstname,
-                     Date birthdate,
+                     String first_name,
+                     Date birth_date,
                      String university_city,
                      boolean glasses,
                      boolean mustache,
@@ -33,8 +32,8 @@ public class Character {
     {
         _id = id;
         _name = name;
-        _firstname = firstname;
-        _birthdate = birthdate;
+        _first_name = first_name;
+        _birth_date = birth_date;
         _university_city = university_city;
         _glasses = glasses;
         _mustache = mustache;
@@ -59,12 +58,12 @@ public class Character {
         return _name;
     }
 
-    public String getFirstname() {
-        return _firstname;
+    public String getFirstName() {
+        return _first_name;
     }
 
-    public Date getBirthdate() {
-        return _birthdate;
+    public Date getBirthDate() {
+        return _birth_date;
     }
 
     public String getUniversityCity() {
@@ -158,8 +157,8 @@ public class Character {
     private static Character createCharacterFromCSV(String[] data) throws ParseException {
         int id = Integer.parseInt(data[0]);
         String name = data[1].toUpperCase();
-        String firstname = data[2].toUpperCase();
-        Date birthdate = new SimpleDateFormat("dd/MM/yyyy").parse(data[3]);
+        String first_name = data[2].toUpperCase();
+        Date birth_date = new SimpleDateFormat("dd/MM/yyyy").parse(data[3]);
         String university_city = data[4].toUpperCase();
         boolean glasses = data[5].equalsIgnoreCase("O");
         boolean mustache = data[6].equalsIgnoreCase("O");
@@ -174,7 +173,7 @@ public class Character {
         boolean displayed_as_kid = data[15].equalsIgnoreCase("O");
         boolean displayed_as_smiling = data[16].equalsIgnoreCase("O");
 
-        return new Character(id, name, firstname, birthdate, university_city, glasses, mustache, beard, hair_type,
+        return new Character(id, name, first_name, birth_date, university_city, glasses, mustache, beard, hair_type,
                 hair_color, eyes_color, gender, hat, holding_something, top_color, displayed_as_kid, displayed_as_smiling,
                 Application.getGameDataFile().getParent() + "\\" + id + ".jpg");
     }
@@ -183,8 +182,8 @@ public class Character {
 //PRIVATE ATTRIBUTES
     private int _id;
     private String _name;
-    private String _firstname;
-    private Date _birthdate;
+    private String _first_name;
+    private Date _birth_date;
     private String _university_city;
     private boolean _glasses;
     private boolean _mustache;
