@@ -2,6 +2,7 @@ package com.app.wit.View;
 
 import com.app.wit.Application;
 import com.app.wit.Model.Character;
+import com.app.wit.Model.Tile;
 import com.app.wit.Tool.PropertiesReader;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,18 +29,7 @@ public class ViewGameController implements Initializable {
 
         //_title_label.setText(PropertiesReader.getMessage(Application.getLanguage(), "game-title"));
         _characters_list = Character.loadCharactersFromFile(Application.getGameDataFile());
-        _characters_image_list = new ArrayList<ImageView>();
-        for(Character character : _characters_list) {
-            Image image = new Image(character.getImagePath());
-            ImageView image_view = new ImageView();
-            image_view.setImage(image);
-            image_view.setFitWidth(PICTURE_SIZE);
-            image_view.setFitHeight(PICTURE_SIZE);
-            image_view.setPreserveRatio(true);
-            image_view.setSmooth(true);
-            image_view.setCache(true);
-            _characters_image_list.add(image_view);
-        }
+        _tiles_list = new ArrayList<>();
 
         refeshGameLayout(Application.INITIAL_WINDOW_WIDTH);
 
@@ -85,29 +75,22 @@ public class ViewGameController implements Initializable {
 
     //PRIVATE METHODS
     public void refeshGameLayout(int window_width) {
-        if(_game_layout_grid_pane.getChildren().size() > 0) {
-            _game_layout_grid_pane.getChildren().clear();
+        if(_tiles_list.size() > 0) {
+            _tiles_list.clear();
         }
 
         int column_counter = 0;
         int row_counter = 0;
-        int fraction = (int) Math.floor(window_width / (PICTURE_SIZE + PICTURE_PADDING)) - 3;
-        for(ImageView image_view : _characters_image_list) {
+        int fraction = (int) Math.floor(window_width / (Application.PICTURE_SIZE + Application.PICTURE_PADDING)) - 3;
+        for(Character character : _characters_list) {
             if(column_counter > fraction) { //Picture padding is in the gridpane settings
                 column_counter = 0;
                 row_counter++;
             }
 
-            // Create a StackPane to center the ImageView within the cell
-            StackPane cellPane = new StackPane();
-            cellPane.setAlignment(Pos.CENTER);
-            cellPane.setStyle(IDLE_BUTTON_STYLE);
-            cellPane.setOnMouseEntered(e -> cellPane.setStyle(HOVERED_BUTTON_STYLE));
-            cellPane.setOnMouseExited(e -> cellPane.setStyle(IDLE_BUTTON_STYLE));
-            cellPane.setPadding(new javafx.geometry.Insets(5, 5, 5, 5)); //This padding has nothing to do with the gridpane padding FYI
-            cellPane.getChildren().add(image_view);
+            _tiles_list.add(new Tile(new Image(character.getImagePath())));
 
-            _game_layout_grid_pane.add(cellPane, column_counter, row_counter);
+            _game_layout_grid_pane.add(_tiles_list.get(_tiles_list.size() - 1).getCellPane(), column_counter, row_counter);
             column_counter++;
         }
     }
@@ -136,14 +119,7 @@ public class ViewGameController implements Initializable {
     private Label _instruction_label;
      */
 
-    private ArrayList<ImageView> _characters_image_list;
-
+    private ArrayList<Tile> _tiles_list;
     private ArrayList<Character> _characters_list;
-
-    //PRIVATE CONSTANTS
-    private static final String IDLE_BUTTON_STYLE = "-fx-background-color: #fffdf7; -fx-background-radius: 5;";
-    private static final String HOVERED_BUTTON_STYLE = "-fx-background-color: rgb(166, 61, 64); -fx-background-radius: 5;";
-    private static final int PICTURE_SIZE = 100;
-    private static final int PICTURE_PADDING = 5;
 
 }

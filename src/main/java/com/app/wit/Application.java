@@ -116,6 +116,8 @@ public class Application extends javafx.application.Application {
     //PUBLIC CONSTANTS
     public static final int INITIAL_WINDOW_WIDTH = 1280;
     public static final int INITIAL_WINDOW_HEIGHT = 720;
+    public static final int PICTURE_SIZE = 100;
+    public static final int PICTURE_PADDING = 5;
 
     //PRIVATE ATTRIBUTES
     private static Stage _main_menu_stage = null;
